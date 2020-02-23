@@ -28,7 +28,7 @@ export default (cnp: string): CnpObject => {
   const validCnpLength = 13;
   if (cnp.length !== validCnpLength) return result;
 
-  const cnpArray: number[] = Array.from(cnp).map(character => Number(character));
+  const cnpArray: number[] = Array.from(cnp).map((character: string) => Number(character));
 
   // Gender
   let genderIndicator = cnpArray[0];
@@ -74,8 +74,8 @@ export default (cnp: string): CnpObject => {
 
   // Check number
   const checkNumber = cnpArray[12];
-  const checkArray = Array.from('279146358279').map(character => Number(character));
-  const checkSum: number = checkArray.reduce((acc, checkDigit, index) => {
+  const checkArray = Array.from('279146358279').map((character: string) => Number(character));
+  const checkSum: number = checkArray.reduce((acc: number, checkDigit: number, index: number) => {
     const cnpDigit = cnpArray[index];
     return acc + cnpDigit * checkDigit;
   }, 0);

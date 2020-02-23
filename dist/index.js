@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (cnp) => {
-    const result = {
-        cnp,
+exports.default = (function (cnp) {
+    var result = {
+        cnp: cnp,
         isValid: false,
         gender: null,
         year: null,
@@ -12,21 +12,21 @@ exports.default = (cnp) => {
         countyIndex: null,
     };
     // General validation for input string
-    const isNumeric = /^\d+$/.test(cnp);
+    var isNumeric = /^\d+$/.test(cnp);
     if (!isNumeric)
         return result;
-    const validCnpLength = 13;
+    var validCnpLength = 13;
     if (cnp.length !== validCnpLength)
         return result;
-    const cnpArray = Array.from(cnp).map(character => Number(character));
+    var cnpArray = Array.from(cnp).map(function (character) { return Number(character); });
     // Gender
-    let genderIndicator = cnpArray[0];
+    var genderIndicator = cnpArray[0];
     if (genderIndicator < 1 || genderIndicator > 8)
         return result;
-    const gender = genderIndicator % 2 === 0 ? 'f' : 'm';
+    var gender = genderIndicator % 2 === 0 ? 'f' : 'm';
     // Year
-    let year = 0;
-    const year2ndPart = cnpArray[1] * 10 + cnpArray[2];
+    var year = 0;
+    var year2ndPart = cnpArray[1] * 10 + cnpArray[2];
     switch (genderIndicator) {
         case 1:
         case 2:
@@ -61,30 +61,30 @@ exports.default = (cnp) => {
     if (year < 1800 || year > 2099)
         return result;
     // Validate date
-    const month = cnpArray[3] * 10 + cnpArray[4];
-    const day = cnpArray[5] * 10 + cnpArray[6];
-    const dateObject = new Date(year, month - 1, day);
-    const dateCheck = `${dateObject.getFullYear()}/${dateObject.getMonth() + 1}/${dateObject.getDate()}`;
-    const isValidDate = `${year}/${month}/${day}` === dateCheck;
+    var month = cnpArray[3] * 10 + cnpArray[4];
+    var day = cnpArray[5] * 10 + cnpArray[6];
+    var dateObject = new Date(year, month - 1, day);
+    var dateCheck = dateObject.getFullYear() + "/" + (dateObject.getMonth() + 1) + "/" + dateObject.getDate();
+    var isValidDate = year + "/" + month + "/" + day === dateCheck;
     if (!isValidDate)
         return result;
     // County
-    const countyIndex = cnpArray[7] * 10 + cnpArray[8];
+    var countyIndex = cnpArray[7] * 10 + cnpArray[8];
     if (countyIndex < 1 || countyIndex > 52)
         return result;
     // Random 3 digits
-    const randomNumber = cnpArray[9] * 100 + cnpArray[10] * 10 + cnpArray[11];
+    var randomNumber = cnpArray[9] * 100 + cnpArray[10] * 10 + cnpArray[11];
     if (randomNumber < 1)
         return result;
     // Check number
-    const checkNumber = cnpArray[12];
-    const checkArray = Array.from('279146358279').map(character => Number(character));
-    const checkSum = checkArray.reduce((acc, checkDigit, index) => {
-        const cnpDigit = cnpArray[index];
+    var checkNumber = cnpArray[12];
+    var checkArray = Array.from('279146358279').map(function (character) { return Number(character); });
+    var checkSum = checkArray.reduce(function (acc, checkDigit, index) {
+        var cnpDigit = cnpArray[index];
         return acc + cnpDigit * checkDigit;
     }, 0);
-    const leftOver = checkSum % 11;
-    const checkResult = leftOver === 10 ? 1 : leftOver;
+    var leftOver = checkSum % 11;
+    var checkResult = leftOver === 10 ? 1 : leftOver;
     if (checkNumber !== checkResult)
         return result;
     result.isValid = true;
@@ -95,5 +95,5 @@ exports.default = (cnp) => {
     result.date = dateObject;
     result.countyIndex = countyIndex;
     return result;
-};
+});
 //# sourceMappingURL=index.js.map
