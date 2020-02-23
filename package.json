@@ -1,0 +1,25 @@
+{
+  "name": "parsare-cnp",
+  "version": "1.0.0",
+  "description": "Functie pentru parsare CNP",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radunemerenco/parsare-cnp.git"
+  },
+  "keywords": [
+    "cnp",
+    "cod",
+    "numeric",
+    "personal"
+  ],
+  "author": "Radu Nemerenco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/radunemerenco/parsare-cnp/issues"
+  },
+  "homepage": "https://github.com/radunemerenco/parsare-cnp#readme"
+}
